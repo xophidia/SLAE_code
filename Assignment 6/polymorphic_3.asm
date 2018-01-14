@@ -3,7 +3,7 @@
 ; Source Shellcode : hard reboot (without any message) and data not lost - 33 bytes
 ; Polymorphic version 39 bytes
 ; Author: Alain Menelet 
-; StudentID - PA-3763
+; StudentID - SLAE-3763
 ; Tested on Ubuntu 16.14.03 LTS
 ; Note : execute with sudo on a VM.
 
