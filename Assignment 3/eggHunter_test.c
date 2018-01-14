@@ -1,7 +1,7 @@
 /*
  *      SLAE - Assignment #3: Egg Hunter Shellcode (Linux/x86)
  *      Author: Alain Menelet 
- *      StudentID - PA-3763
+ *      StudentID - SLAE-3763
  *      HowTo: gcc -fno-stack-protector -z execstack test_shellcode.c -o test_shellcode
  */
 
